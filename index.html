@@ -382,6 +382,15 @@
       font-size:1.2rem; cursor:pointer; transition:background .3s;
     }
     .video-play-btn:hover { background:rgba(207,229,48,.25); }
+    .video-sound-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; cursor: pointer; transition: background .25s, border-color .25s, transform .2s;
+      color: var(--white); line-height: 1;
+    }
+    .video-sound-btn:hover { background: rgba(207,229,48,.2); border-color: rgba(207,229,48,.5); transform: scale(1.08); }
+    .video-sound-btn.unmuted { background: rgba(207,229,48,.15); border-color: rgba(207,229,48,.4); }
 
     /* ═══════════════════════════════════════════
        PALMARÈS
@@ -814,8 +823,9 @@
           Intensité, précision, victoires — les moments qui définissent un champion en devenir.
         </p>
         <div class="video-play-hint reveal d3">
-          <div class="video-play-btn">▶</div>
-          <span>Lecture automatique</span>
+          <div class="video-play-btn" id="playBtn1">▶</div>
+          <button class="video-sound-btn" id="muteBtn1" title="Activer/couper le son">🔇</button>
+          <span>Lecture automatique · Son désactivé par défaut</span>
         </div>
       </div>
     </div>
@@ -919,6 +929,10 @@
         <p class="reveal d2" style="font-size:clamp(.82rem,1.4vw,1rem); color:rgba(240,237,232,.55); margin-top:.8rem; max-width:480px;">
           Puissance, précision, caractère — l'essence d'un champion.
         </p>
+        <div style="display:flex; align-items:center; gap:.8rem; margin-top:1.2rem;">
+          <button class="video-sound-btn" id="muteBtn2" title="Activer/couper le son">🔇</button>
+          <span style="font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(240,237,232,.35);">Son désactivé par défaut</span>
+        </div>
       </div>
     </div>
   </section>
@@ -928,19 +942,19 @@
   <section id="galerie" class="pad" style="padding-top:0; padding-bottom:0;">
     <div class="gallery-grid">
       <div class="gallery-item tall">
-        <img src="assets/photo_de.jpg" alt="Lenart Kadriu" loading="lazy" style="object-position:top center;">
+        <img src="assets/photo_hju.jpg" alt="Lenart Kadriu — victoire index levé, trophée" loading="lazy" style="object-position:top center;">
       </div>
       <div class="gallery-item">
         <img src="assets/photo_2.jpg" alt="Lenart — trophée Tennis Europe, Croatie" loading="lazy" style="object-position:center bottom;">
       </div>
       <div class="gallery-item">
-        <img src="assets/photo_3.jpg" alt="Lenart — remise de prix Vaud, HEAD sponsor" loading="lazy">
+        <img src="assets/photo_3.jpg" alt="Lenart — remise de prix Vaud, HEAD sponsor" loading="lazy" style="object-position:top center;">
       </div>
       <div class="gallery-item">
-        <img src="assets/photo_1.jpg" alt="Lenart et partenaire sur court terre battue" loading="lazy">
+        <img src="assets/photo_trophe.jpg" alt="Lenart Kadriu — trophée RealSport" loading="lazy" style="object-position:top center;">
       </div>
       <div class="gallery-item">
-        <img src="assets/photo_8.jpg" alt="Lenart — trophée Istarska Riviera, Croatie" loading="lazy">
+        <img src="assets/photo_8.jpg" alt="Lenart — trophée Istarska Riviera, Croatie" loading="lazy" style="object-position:top center;">
       </div>
       <div class="gallery-item">
         <img src="assets/photo_de.jpg" alt="Lenart Kadriu" loading="lazy" style="object-position:top center;">
@@ -955,7 +969,7 @@
       <div class="passion-layout">
 
         <div class="passion-img rev-l">
-          <img src="assets/photo_10.jpg" alt="Lenart Kadriu — victoire indoor RealSport" loading="lazy">
+          <img src="assets/photo_petit.jpg" alt="Lenart Kadriu — ses débuts, 4 ans" loading="lazy" style="object-position:top center;">
         </div>
 
         <div>
@@ -1170,13 +1184,36 @@
       if (heroGlow) heroGlow.style.transform = `translate(-50%, calc(-50% + ${y * 0.12}px))`;
     }, { passive: true });
 
-    /* ── Video play/pause on click ── */
-    const video = document.querySelector('#en-action video');
-    const playBtn = document.querySelector('.video-play-btn');
-    if (video && playBtn) {
-      playBtn.addEventListener('click', () => {
-        if (video.paused) { video.play(); playBtn.textContent = '⏸'; }
-        else { video.pause(); playBtn.textContent = '▶'; }
+    /* ── Vidéo 1 : "En Action" (video_lenart) ── */
+    const video1   = document.querySelector('#en-action video');
+    const playBtn1 = document.getElementById('playBtn1');
+    const muteBtn1 = document.getElementById('muteBtn1');
+    if (video1) {
+      // play/pause
+      if (playBtn1) {
+        playBtn1.addEventListener('click', () => {
+          if (video1.paused) { video1.play(); playBtn1.textContent = '⏸'; }
+          else { video1.pause(); playBtn1.textContent = '▶'; }
+        });
+      }
+      // mute/unmute
+      if (muteBtn1) {
+        muteBtn1.addEventListener('click', () => {
+          video1.muted = !video1.muted;
+          muteBtn1.textContent = video1.muted ? '🔇' : '🔊';
+          muteBtn1.classList.toggle('unmuted', !video1.muted);
+        });
+      }
+    }
+
+    /* ── Vidéo 2 : "En Vidéo" (lenart_kadriu) ── */
+    const video2   = document.querySelector('#en-video video');
+    const muteBtn2 = document.getElementById('muteBtn2');
+    if (video2 && muteBtn2) {
+      muteBtn2.addEventListener('click', () => {
+        video2.muted = !video2.muted;
+        muteBtn2.textContent = video2.muted ? '🔇' : '🔊';
+        muteBtn2.classList.toggle('unmuted', !video2.muted);
       });
     }
   </script>
