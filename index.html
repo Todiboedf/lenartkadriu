@@ -257,7 +257,7 @@
       position: relative; border-radius: 4px; overflow: hidden;
       aspect-ratio: 3/4; max-width: 380px;
     }
-    .joueur-portrait img { width:100%; height:100%; object-fit:cover; object-position: center top; }
+    .joueur-portrait img { width:100%; height:100%; object-fit:cover; object-position: top center; }
     .joueur-portrait::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(7,11,18,.8) 0%, transparent 50%);
@@ -395,7 +395,7 @@
       max-height: 380px;
     }
     .palmares-trophy img {
-      width:100%; height:380px; object-fit:cover; object-position:center 30%;
+      width:100%; height:380px; object-fit:cover; object-position:top center;
       filter: brightness(.85) contrast(1.05);
     }
     .palmares-trophy::after {
@@ -448,7 +448,7 @@
       overflow: hidden; border-radius: 4px; position: relative; cursor: pointer;
     }
     .gallery-item.tall { grid-row: span 2; }
-    .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease, filter .4s; filter:brightness(.9) saturate(.9); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .5s ease, filter .4s; filter:brightness(.9) saturate(.9); }
     .gallery-item:hover img { transform:scale(1.05); filter:brightness(1) saturate(1.1); }
     .gallery-item::after {
       content:''; position:absolute; inset:0;
@@ -562,6 +562,24 @@
     .cta-ico { transition:transform .25s; }
     .cta-btn:hover .cta-ico { transform:translateX(5px); }
 
+    /* ── Membres layout ── */
+    .membres-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+    .membres-img {
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      border: 1px solid var(--border);
+    }
+    @media(max-width:700px) {
+      .membres-layout { grid-template-columns: 1fr; }
+      .membres-img { aspect-ratio: 4/3; max-height: 260px; }
+    }
+
     /* ═══════════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════════ */
@@ -670,7 +688,7 @@
       <div class="joueur-grid">
 
         <div class="joueur-portrait rev-l">
-          <img src="assets/photo_6.jpg" alt="Portrait officiel Lenart Kadriu" loading="lazy">
+          <img src="assets/photo_identite.jpg" alt="Portrait officiel Lenart Kadriu" loading="lazy" style="object-position: top center;">
           <div class="joueur-portrait-caption">Lenart Kadriu · Tennisman Suisse U14</div>
         </div>
 
@@ -690,6 +708,12 @@
             <span class="tag">Vevey</span>
             <span class="tag">Français · Anglais</span>
             <span class="tag">HEAD Tennis</span>
+          </div>
+
+          <!-- Photo Team Vaud -->
+          <div class="reveal d5" style="margin-top:1.8rem; border-radius:4px; overflow:hidden; max-height:220px; border:1px solid var(--border);">
+            <img src="assets/photo_vaud.jpg" alt="Lenart Kadriu avec le Team Vaud" loading="lazy"
+                 style="width:100%; height:220px; object-fit:cover; object-position:top center;">
           </div>
           <div class="joueur-stats reveal d5">
             <div class="stat-card">
@@ -810,8 +834,7 @@
         <div class="pal-block reveal d1">
           <div class="pal-header"><span>🇨🇭</span> Suisse</div>
           <ul class="pal-list">
-            <li><span class="pal-medal">🥇</span><div class="pal-info"><strong>Champion Vaudois</strong><span>Tennis Vaud</span></div></li>
-            <li><span class="pal-medal">🥈</span><div class="pal-info"><strong>3× Vice-Champion Vaudois</strong><span>Tennis Vaud</span></div></li>
+            <li><span class="pal-medal">🥇</span><div class="pal-info"><strong>4× Champion Vaudois</strong><span>Tennis Vaud</span></div></li>
             <li><span class="pal-medal">🏆</span><div class="pal-info"><strong>Vainqueur — TC Gland 2025</strong><span>Road to Montreux · MS</span></div></li>
             <li><span class="pal-medal">🏆</span><div class="pal-info"><strong>Plusieurs victoires nationales</strong><span>Dans sa catégorie d'âge</span></div></li>
           </ul>
@@ -916,7 +939,7 @@
   <section id="sponsors" class="pad">
     <div class="inner">
 
-      <div class="label reveal">Partenaires &amp; Membres</div>
+      <div class="label reveal">Sponsors</div>
       <h2 class="dtitle reveal d1">Ceux Qui<br>Croient en Lui</h2>
 
       <div class="sponsors-grid">
@@ -937,13 +960,34 @@
           <span class="sponsor-arrow">↗</span>
         </a>
         <a href="https://www.facebook.com/100057236508975/about/" target="_blank" rel="noopener noreferrer" class="sponsor-card reveal d3">
-          <div class="sponsor-ico">🏅</div>
+          <div class="sponsor-ico">🚗</div>
           <div>
-            <div class="sponsor-name">Team Vaud / Swiss Tennis</div>
-            <div class="sponsor-role">Structure nationale d'entraînement</div>
+            <div class="sponsor-name">COY Centre Occasions Yvorne</div>
+            <div class="sponsor-role">Partenaire officiel</div>
           </div>
           <span class="sponsor-arrow">↗</span>
         </a>
+      </div>
+
+      <!-- Membres & Affiliations -->
+      <div style="margin-top: 4rem;">
+        <div class="label reveal">Affiliations</div>
+        <h3 class="reveal d1" style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3.5vw,3rem); letter-spacing:.04em; margin-bottom:2rem;">Membres &amp; Structures</h3>
+        <div class="membres-layout reveal d2">
+          <div class="membres-img">
+            <img src="assets/photo_olympique.jpg" alt="Carte de membre Swiss Olympique — Lenart Kadriu" loading="lazy" style="object-fit:cover; object-position:top center; width:100%; height:100%; border-radius:4px;">
+          </div>
+          <div class="membres-text">
+            <p style="font-size:clamp(.95rem,1.4vw,1.08rem); line-height:1.85; color:rgba(240,237,232,.72);">
+              Lenart est membre du <strong>Team Vaud</strong>, cadre vaudois et suprarégional de Swiss Tennis, et affilié à <strong>Swiss Olympique</strong>. Ces structures lui assurent un encadrement de haut niveau et lui ouvrent les portes des compétitions nationales et internationales les plus prestigieuses.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.5rem;">
+              <span class="tag accent">Team Vaud</span>
+              <span class="tag accent">Swiss Tennis</span>
+              <span class="tag accent">Swiss Olympique</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Packages partenariat -->
