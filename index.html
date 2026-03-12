@@ -155,7 +155,7 @@
     .hero-bg {
       position: absolute; inset: 0;
       background-image: url('assets/photo_9.jpg');
-      background-size: cover; background-position: center 30%;
+      background-size: cover; background-position: center 15%;
       transform: scale(1.05);
       transition: transform 20s ease;
     }
@@ -346,13 +346,16 @@
     }
     .video-wrap video {
       width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: contrast(1.1) brightness(1.05) saturate(1.2);
     }
     .video-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg,
-        rgba(7,11,18,.7) 0%,
-        rgba(7,11,18,.1) 50%,
-        rgba(7,11,18,.6) 100%
+      background: linear-gradient(
+        to top,
+        rgba(7,11,18,.9) 0%,
+        rgba(7,11,18,.5) 35%,
+        rgba(7,11,18,.15) 65%,
+        rgba(7,11,18,.05) 100%
       );
       display: flex; flex-direction: column;
       align-items: flex-start; justify-content: flex-end;
@@ -565,19 +568,26 @@
     /* ── Membres layout ── */
     .membres-layout {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: clamp(2rem, 4vw, 4rem);
       align-items: center;
     }
     .membres-img {
       border-radius: 4px;
       overflow: hidden;
-      aspect-ratio: 3/4;
+      aspect-ratio: 16/9;
       border: 1px solid var(--border);
+      max-width: 420px;
+    }
+    .membres-img img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center center !important;
     }
     @media(max-width:700px) {
       .membres-layout { grid-template-columns: 1fr; }
-      .membres-img { aspect-ratio: 4/3; max-height: 260px; }
+      .membres-img { max-width: 100%; }
     }
 
     /* ═══════════════════════════════════════════
@@ -711,9 +721,9 @@
           </div>
 
           <!-- Photo Team Vaud -->
-          <div class="reveal d5" style="margin-top:1.8rem; border-radius:4px; overflow:hidden; max-height:220px; border:1px solid var(--border);">
+          <div class="reveal d5" style="margin-top:1.8rem; border-radius:4px; overflow:hidden; border:1px solid var(--border);">
             <img src="assets/photo_vaud.jpg" alt="Lenart Kadriu avec le Team Vaud" loading="lazy"
-                 style="width:100%; height:220px; object-fit:cover; object-position:top center;">
+                 style="width:100%; height:260px; object-fit:cover; object-position:center 0%;">
           </div>
           <div class="joueur-stats reveal d5">
             <div class="stat-card">
@@ -885,14 +895,43 @@
   </section>
 
 
+  <!-- ═══ EN VIDÉO ═══ -->
+  <section id="en-video" style="background:var(--bg); position:relative; overflow:hidden;">
+    <div style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;">
+      <video autoplay muted loop playsinline preload="metadata"
+             style="width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.1) brightness(1.05) saturate(1.15);">
+        <source src="assets/lenart_kadriu.mp4" type="video/mp4">
+      </video>
+      <div style="
+        position:absolute; inset:0;
+        background: linear-gradient(to top, rgba(7,11,18,.92) 0%, rgba(7,11,18,.45) 40%, rgba(7,11,18,.08) 100%);
+        display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
+        padding:clamp(2rem,5vw,5rem) clamp(1.5rem,5vw,6rem);
+      ">
+        <div class="label reveal" style="margin-bottom:.6rem;">En Vidéo</div>
+        <h2 class="reveal d1" style="
+          font-family:'Bebas Neue',sans-serif;
+          font-size:clamp(3.5rem,10vw,10rem);
+          line-height:.88; color:var(--white);
+          text-shadow:0 2px 40px rgba(0,0,0,.5);
+          letter-spacing:.01em;
+        ">LENART<br><span style="color:var(--accent);">EN ACTION</span></h2>
+        <p class="reveal d2" style="font-size:clamp(.82rem,1.4vw,1rem); color:rgba(240,237,232,.55); margin-top:.8rem; max-width:480px;">
+          Puissance, précision, caractère — l'essence d'un champion.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ═══ GALERIE ═══ -->
   <section id="galerie" class="pad" style="padding-top:0; padding-bottom:0;">
     <div class="gallery-grid">
       <div class="gallery-item tall">
-        <img src="assets/photo_9.jpg" alt="Lenart Kadriu — victoire indoor, raquette levée" loading="lazy">
+        <img src="assets/photo_de.jpg" alt="Lenart Kadriu" loading="lazy" style="object-position:top center;">
       </div>
       <div class="gallery-item">
-        <img src="assets/photo_2.jpg" alt="Lenart — trophée Tennis Europe, Croatie" loading="lazy">
+        <img src="assets/photo_2.jpg" alt="Lenart — trophée Tennis Europe, Croatie" loading="lazy" style="object-position:center bottom;">
       </div>
       <div class="gallery-item">
         <img src="assets/photo_3.jpg" alt="Lenart — remise de prix Vaud, HEAD sponsor" loading="lazy">
@@ -904,7 +943,7 @@
         <img src="assets/photo_8.jpg" alt="Lenart — trophée Istarska Riviera, Croatie" loading="lazy">
       </div>
       <div class="gallery-item">
-        <img src="assets/photo_7.jpg" alt="Lenart — trophée, drapeaux croate et européen" loading="lazy">
+        <img src="assets/photo_de.jpg" alt="Lenart Kadriu" loading="lazy" style="object-position:top center;">
       </div>
     </div>
   </section>
